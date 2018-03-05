@@ -1,0 +1,13 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Node API boilerplate",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "description": "Local server",
+      "url": "/api"
+    }
+  ]
+}

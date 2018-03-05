@@ -1,0 +1,62 @@
+{
+  "name": "node-api-boilerplate",
+  "version": "1.1.1",
+  "description": "A Clean Architecture Node.js Application",
+  "main": "index.js",
+  "private": true,
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "scripts": {
+    "start": "node cluster.js",
+    "dev": "cross-env NODE_PATH=. NODE_ENV=development nodemon",
+    "test": "npm run test:all",
+    "test:all": "npm run test:unit && npm run test:features",
+    "test:unit": "cross-env NODE_PATH=. NODE_ENV=test mocha --opts test/mocha.opts.unit",
+    "test:features": "cross-env NODE_PATH=. NODE_ENV=test mocha --opts test/mocha.opts.features",
+    "coverage": "cross-env NODE_PATH=. NODE_ENV=test nyc mocha --opts test/mocha.opts.unit",
+    "lint": "eslint {src,test,config}/**/*.js",
+    "console": "cross-env NODE_PATH=. node src/interfaces/console/index.js",
+    "pm2": "pm2"
+  },
+  "repository": {},
+  "author": "Asyraf <me@asyraf.id>",
+  "license": "MIT",
+  "dependencies": {
+    "awilix": "^3.0.6",
+    "awilix-express": "^1.0.0",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
+    "cross-env": "^5.1.3",
+    "del": "^3.0.0",
+    "dotenv": "^5.0.1",
+    "eslint": "^4.18.2",
+    "express": "^4.16.2",
+    "express-status-monitor": "^1.0.1",
+    "express-validator": "^5.0.3",
+    "http-status": "^1.0.1",
+    "log4js": "^2.5.3",
+    "method-override": "^2.3.10",
+    "mongoose": "^5.0.8",
+    "morgan": "^1.9.0",
+    "pg": "^7.4.1",
+    "pm2": "^2.10.1",
+    "structure": "^1.2.2",
+    "swagger-ui-express": "^2.0.14"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-change": "^2.1.2",
+    "chance": "^1.0.13",
+    "dirty-chai": "^2.0.1",
+    "factory-girl": "^5.0.2",
+    "listr": "^0.13.0",
+    "mocha": "^5.0.1",
+    "nodemon": "^1.17.1",
+    "nyc": "^11.4.1",
+    "replace-in-file": "^3.1.1",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2"
+  }
+}
