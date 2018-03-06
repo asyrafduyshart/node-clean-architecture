@@ -65,43 +65,4 @@ container.register({
   userSerializer: asValue(UserSerializer)
 });
 
-
-// container
-//   .registerFunction({
-//     loggerMiddleware: [loggerMiddleware, { lifetime: Lifetime.SINGLETON }]
-//   })
-//   .registerValue({
-//     containerMiddleware: scopePerRequest(container),
-//     errorHandler: config.production ? errorHandler : devErrorHandler,
-//     swaggerMiddleware: [swaggerMiddleware]
-//   });
-
-// // Repositories
-// container.registerClass({
-//   usersRepository: [MongoUsersRepository, { lifetime: Lifetime.SINGLETON }],
-// });
-
-// // Database
-// container.registerFunction({
-//   database
-// });
-
-// container.registerValue({
-//   UserModel
-// });
-
-// // Operations
-// container.registerClass({
-//   createUser: CreateUser,
-//   getAllUsers: GetAllUsers,
-//   updateUser: UpdateUser,
-//   getUserByUid: GetByUid,
-//   deleteUser: DeleteUser
-// });
-
-// // Serializers
-// container.registerValue({
-//   userSerializer: UserSerializer
-// });
-
 module.exports = container;
