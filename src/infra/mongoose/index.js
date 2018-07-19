@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
-module.exports = ({ logger }) => {
-
-  const uri = 'mongodb://localhost:37017/user_resto';
+module.exports = ({ logger, config }) => {
+  const { username, password, database, host, port, dialect } = config.db;
+  const uri = `${dialect}://${username}:${password}@${host}:${port}/${database}`;
+  console.log(uri);
   // set mongoose Promise to Bluebird
   mongoose.Promise = Promise;
 
