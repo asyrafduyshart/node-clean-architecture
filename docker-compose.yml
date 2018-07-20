@@ -1,0 +1,13 @@
+version: '2.1'
+
+services:
+  nodejs:
+    image: node-clean-architecture
+    container_name: node-clean-architecture
+    build: .
+    environment:
+      NODE_ENV: production
+    env_file:
+      - .env  
+    ports:
+      - 3000:3000

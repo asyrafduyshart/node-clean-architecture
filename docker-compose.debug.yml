@@ -1,0 +1,23 @@
+version: '2.1'
+
+services:
+  nodejs:
+    image: node-clean-architecture
+    build: .
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: mongodb://root:mypass@mongodbnode:27017/admin
+    ports:
+      - 3000:3000
+    links:
+      - mongodb
+    depends_on:
+      - mongodb  
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodbnode"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mypass
+    ports:
+        - 27017:27017

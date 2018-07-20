@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 
 module.exports = ({ logger, config }) => {
-  const { username, password, database, host, port, dialect } = config.db;
-  const uri = `${dialect}://${username}:${password}@${host}:${port}/${database}`;
+  let uri = process.env.DATABASE_URL;
+  // if (config.env === 'development'){
+  //   const { username, password, database, host, port, dialect } = config.db;
+  //   uri = `${dialect}://${username}:${password}@${host}:${port}/${database}`;
+  // }
+
   console.log(uri);
   // set mongoose Promise to Bluebird
   mongoose.Promise = Promise;
@@ -10,7 +14,7 @@ module.exports = ({ logger, config }) => {
   // Exit application on error
   mongoose.connection.on('error', (err) => {
     logger.error(`MongoDB connection error: ${err}`);
-    process.exit(-1);
+    process.exit(1);
   });
 
   // Exit application on error
