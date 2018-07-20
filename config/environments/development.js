@@ -1,6 +1,6 @@
 const path = require('path');
 const logPath = path.join(__dirname, '../../logs/development.log');
-
+console.log(logPath)
 module.exports = {
   web: {
     port: 3000

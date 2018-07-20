@@ -6,10 +6,10 @@ const compression = require('compression');
 const methodOverride = require('method-override');
 const expressValidator = require('express-validator'); 
 const controller = require('./utils/createControllerRoutes');
+const { scopePerRequest } = require('awilix-express');
 
 module.exports = ({ config, containerMiddleware, loggerMiddleware, errorHandler, swaggerMiddleware }) => {
   const router = Router();
-
   /* istanbul ignore if */
   if(config.env === 'development') {
     router.use(statusMonitor());
