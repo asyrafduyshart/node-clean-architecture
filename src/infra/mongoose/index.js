@@ -27,7 +27,8 @@ module.exports = ({ logger, config }) => {
 
 
   mongoose.connect(uri, {
-    keepAlive: 1
+    keepAlive: 1,
+    useNewUrlParser: true
   });
   return mongoose.connection;
 };
