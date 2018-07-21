@@ -6,7 +6,6 @@ const compression = require('compression');
 const methodOverride = require('method-override');
 const expressValidator = require('express-validator'); 
 const controller = require('./utils/createControllerRoutes');
-const { scopePerRequest } = require('awilix-express');
 
 module.exports = ({ config, containerMiddleware, loggerMiddleware, errorHandler, swaggerMiddleware }) => {
   const router = Router();
@@ -28,7 +27,6 @@ module.exports = ({ config, containerMiddleware, loggerMiddleware, errorHandler,
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: false }))
     .use(compression())
-    .use(containerMiddleware)
     .use(expressValidator())
     .use('/docs', swaggerMiddleware);
 
@@ -42,10 +40,12 @@ module.exports = ({ config, containerMiddleware, loggerMiddleware, errorHandler,
    */
   apiRouter.use('/users', controller('controller/user/UsersController'));
 
+  router
+    .use(containerMiddleware)
+    .use('/api', apiRouter)
+    .use(errorHandler);
 
-  router.use('/api', apiRouter);
 
-  router.use(errorHandler);
 
   return router;
 };
