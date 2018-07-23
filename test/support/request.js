@@ -1,5 +1,5 @@
 const request = require('supertest-as-promised');
 const container = require('src/container');
-const server = container.resolve('server');
+const app = container.resolve('app');
 
-module.exports = () => request(server.express);
+module.exports = () => request(app.server.express);

@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 
 module.exports = ({ logger, config }) => {
   let uri = process.env.DATABASE_URL;
-  // if (config.env === 'development'){
-  //   const { username, password, database, host, port, dialect } = config.db;
-  //   uri = `${dialect}://${username}:${password}@${host}:${port}/${database}`;
-  // }
+  if (config.env === 'test'){
+    // const { username, password, database, host, port, dialect } = config.db;
+    // uri = `${dialect}://${username}:${password}@${host}:${port}/${database}`;
+    uri = config.db;
+  }
   // set mongoose Promise to Bluebird
   mongoose.Promise = Promise;
 
@@ -13,11 +14,6 @@ module.exports = ({ logger, config }) => {
   mongoose.connection.on('error', (err) => {
     logger.error(`MongoDB connection error: ${err}`);
     process.exit(1);
-  });
-
-  // Exit application on error
-  mongoose.connection.on('connected', () => {
-    logger.info(`Mongoose default connection is open to ${uri}`);
   });
 
   // print mongoose logs in dev env
@@ -28,5 +24,12 @@ module.exports = ({ logger, config }) => {
     keepAlive: 1,
     useNewUrlParser: true
   });
-  return mongoose.connection;
+
+  return new Promise((resolve, reject) => {
+    mongoose.connection.on('connected', () => {
+      logger.info(`Mongoose default connection is open to ${uri}`);
+      resolve(mongoose.connection)
+    });
+  });
+  
 };
