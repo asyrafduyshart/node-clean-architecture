@@ -15,10 +15,9 @@ module.exports = ({ config, containerMiddleware, loggerMiddleware, errorHandler,
   }
 
   /* istanbul ignore if */
-  // if(config.env !== 'test') {
-  //   router.use(loggerMiddleware);
-  // }
-  router.use(loggerMiddleware);
+  if(config.env !== 'test') {
+    router.use(loggerMiddleware);
+  }
 
   const apiRouter = Router();
 

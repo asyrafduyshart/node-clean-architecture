@@ -13,8 +13,9 @@ class Server {
   start() {
     return new Promise((resolve) => {
       const http = this.express
-        .listen(this.config.web.port, () => {
+        .listen(this.config.web.port, '127.0.0.1', () => {
           const { port } = http.address();
+          this.logger.info(...http.address());
           this.logger.info(`[p ${process.pid}] Listening at port ${port}`);
           resolve();
         });
